@@ -1,0 +1,10 @@
+
+*.nc
+*.pth
+__pycache__/
+*.pyc
+
+*.nc
+*.pth
+__pycache__/
+*.pyc

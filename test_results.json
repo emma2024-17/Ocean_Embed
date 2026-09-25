@@ -1,0 +1,24 @@
+{
+  "output_shape": "PASSED",
+  "output_range": "PASSED",
+  "consistency": "PASSED",
+  "real_data": {
+    "rmse": 2.115089406413534,
+    "mae": 1.3466222903025118,
+    "rmse_std": 0.6161438382082235,
+    "depths_within_threshold": 100.0
+  },
+  "overfitting_analysis": {
+    "train_loss": 0.02250232920050621,
+    "val_loss": 0.022875932976603508,
+    "overfit_ratio": 1.0166028935390783,
+    "status": "EXCELLENT",
+    "recommendations": [
+      "Model is well-balanced"
+    ],
+    "convergence": "NOT_CONVERGED"
+  },
+  "dropout_effect": "PASSED",
+  "batch_norm": "PASSED",
+  "gradient_flow": "PASSED"
+}
