@@ -8,6 +8,36 @@ from urllib.error import URLError
 from urllib.request import Request, urlopen
 from train_model import OceanEmbedUNet, load_and_preprocess_nc
 
+# ==========================================
+# GOOGLE DRIVE DATASET SETUP (additive only)
+# ==========================================
+# This block downloads the .nc dataset from Google Drive the first time the
+# app runs, and does nothing on later runs since the file already exists.
+# It does not touch or override any of the logic below.
+GDRIVE_FILE_ID = "1stCmdQEnUZnmyyzlLss8O1JtK42Zknpu"
+NC_DATA_PATH = "./data/glorys_subset.nc"
+
+
+@st.cache_data(show_spinner="Downloading ocean dataset from Google Drive...")
+def ensure_dataset_downloaded():
+    """Download the GLORYS subset from Google Drive if it isn't already present
+    locally at the path the rest of the app expects (./data/glorys_subset.nc)."""
+    os.makedirs(os.path.dirname(NC_DATA_PATH), exist_ok=True)
+    if not os.path.exists(NC_DATA_PATH):
+        import gdown  # imported here so the app still runs if gdown isn't installed
+        gdown.download(
+            f"https://drive.google.com/uc?id={GDRIVE_FILE_ID}",
+            NC_DATA_PATH,
+            quiet=False,
+        )
+    return NC_DATA_PATH
+
+
+ensure_dataset_downloaded()
+# ==========================================
+# YOUR EXISTING CODE STARTS BELOW, UNCHANGED
+# ==========================================
+
 st.set_page_config(layout="wide", page_title="OceanEmbed PoC Dashboard")
 
 # Presentation-only styling: the model, controls, and inference flow remain unchanged.
